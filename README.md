@@ -1,4 +1,4 @@
-# BOOKWORM V2.0 wants to 'hire' gpt4free as our AI-Helper 🤖 in the web
+# BOOKWORM v2.0 wants to 'hire' gpt as our AI-Helper 🤖 in the web
 
 My first full-stack web app [BOOKWORM v1.0](https://github.com/yanliu1111/ReactFirebase-FullStackProject-bookLibrary) was built by Nov. 2022. I want to improve it by adding an AI helper to help me to manage my book library. I want to use gpt4free as my AI helper.
 
