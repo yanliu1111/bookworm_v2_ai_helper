@@ -14,6 +14,7 @@ My first full-stack web app [BOOKWORM v1.0](https://github.com/yanliu1111/ReactF
 - Tailwind CSS
 - Class merging with tailwind-merge
 - Conditional classes with clsx
+- zod for validation
 - yarn
 
 ## Getting Started
