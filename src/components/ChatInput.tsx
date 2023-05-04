@@ -1,5 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
+import { nanoid } from "nanoid";
 import { FC, HTMLAttributes, useState } from "react";
 import TextareaAtutosize from "react-textarea-autosize";
 
@@ -7,11 +9,37 @@ interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
   const [input, setInput] = useState<string>("");
+  const { mutate: sendMessage, isLoading } = useMutation({
+    mutationFn: async (message: Message) => {
+      const response = await fetch("/api/message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: "HELLO" }),
+      });
+      return response.body;
+    },
+    onSuccess: () => {
+      console.log("SUCCESS");
+    },
+  });
   return (
     <div {...props} className={cn("border-t border-zinc-300", className)}>
       <div className="relative mt-4 flex-1 overflow-hidden rounded-lg border-none outline-none">
         <TextareaAtutosize
           rows={2}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              const message = {
+                id: nanoid(),
+                isUserInput: true,
+                text: input,
+              };
+              sendMessage(message);
+            }
+          }}
           maxRows={4}
           value={input}
           onChange={(e: any) => setInput(e.target.value)}
