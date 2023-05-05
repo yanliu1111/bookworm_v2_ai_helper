@@ -31,7 +31,7 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 🤶 Learning Notes what to share
+## 🤶 Sharing Some Learning Notes:
 
 - New hooks use: useMutation: for irregular data fetching
   **Question**: why dont use axios? I found the this approach way better if we want to return a readable stream back to the client.
