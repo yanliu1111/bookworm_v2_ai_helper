@@ -16,7 +16,11 @@ export async function POST(req: Request) {
       content: message.text,
     };
   });
-  outboundMessages.unshift({ role: "system", content: chatbotPrompt });
+
+  outboundMessages.unshift({
+    role: "system",
+    content: chatbotPrompt,
+  });
 
   const payload: OpenAIStreamPayload = {
     model: "gpt-3.5-turbo",

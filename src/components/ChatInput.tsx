@@ -10,6 +10,7 @@ interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
   const [input, setInput] = useState<string>("");
+
   const { mutate: sendMessage, isLoading } = useMutation({
     mutationFn: async (message: Message) => {
       const response = await fetch("/api/message", {
@@ -17,7 +18,7 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: [message] }),
+        body: JSON.stringify({ messages: [message] }),
       });
       return response.body;
     },
