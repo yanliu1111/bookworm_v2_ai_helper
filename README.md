@@ -36,7 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - New hooks use: useMutation: for irregular data fetching <br>
   **Question**: why dont use axios? I found the this approach way better if we want to return a readable stream back to the client.
 
-**Enter key to send message**, Enter + Shift key to new line
+- **Enter key to send message**, Enter + Shift key to new line
 
 ```ts
 onKeyDown={(e) => {
@@ -48,9 +48,9 @@ onKeyDown={(e) => {
           }}
 ```
 
-**Shortcuts:** ctrl + space to check all expected values in {}
+- **Shortcuts:** ctrl + space to check all expected values in {}
 
-**New package** was installed for working with a readable stream, you can create an instance of the parser, and feed it chunks of data - partial or complete:
+- **New package** was installed for working with a readable stream, you can create an instance of the parser, and feed it chunks of data - partial or complete:
 
 ```ts
 yarn add eventsource-parser
