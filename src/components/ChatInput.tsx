@@ -22,8 +22,20 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
       });
       return response.body;
     },
-    onSuccess: () => {
-      console.log("SUCCESS");
+    //got the readable stream from the server, on to the client receive it right here onSunccess
+    //here I will display the readable stream as string in real time to the client
+    onSuccess: async (stream) => {
+      if (!stream) throw new Error("No stream found");
+      const reader = stream.getReader();
+      const decoder = new TextDecoder();
+      let done = false;
+
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        const chunkValue = decoder.decode(value);
+        console.log("chunkValue", chunkValue);
+      }
     },
   });
   return (
