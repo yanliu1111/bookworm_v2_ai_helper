@@ -2,7 +2,7 @@
 
 ## Introduction
 
-My first full-stack web app [BOOKWORM v1.0](https://github.com/yanliu1111/ReactFirebase-FullStackProject-bookLibrary) was built by Nov. 2022. I want to improve it by adding an AI helper to help user to manage my book library. I want to use gpt4free as the web AI helper.
+My first full-stack web app [BOOKWORM v1.0](https://github.com/yanliu1111/ReactFirebase-FullStackProject-bookLibrary) was built by Nov. 2022. I want to improve it by adding an AI helper to assist user to manage my book library. I want to use gpt as the web AI helper.
 
 > Imagination is limitless. See what I can do for BOOKWORM v2.0 this time. Happy coding! 🧖‍♀️
 
