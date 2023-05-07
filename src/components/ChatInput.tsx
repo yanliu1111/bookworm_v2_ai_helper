@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Message } from "@/lib/validators/message";
 import { useMutation } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
-import { FC, HTMLAttributes, useContext, useState } from "react";
+import { FC, HTMLAttributes, useContext, useRef, useState } from "react";
 import TextareaAtutosize from "react-textarea-autosize";
 
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
@@ -18,6 +18,8 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
     updateMessage,
     setIsMessageUpdating,
   } = useContext(MessagesContext);
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const { mutate: sendMessage, isLoading } = useMutation({
     mutationFn: async (message: Message) => {
@@ -58,12 +60,17 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
       //clean up
       setIsMessageUpdating(false);
       setInput("");
+
+      setTimeout(() => {
+        textareaRef.current?.focus();
+      }, 10);
     },
   });
   return (
     <div {...props} className={cn("border-t border-zinc-300", className)}>
       <div className="relative mt-4 flex-1 overflow-hidden rounded-lg border-none outline-none">
         <TextareaAtutosize
+          ref={textareaRef}
           rows={2}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
