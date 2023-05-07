@@ -32,6 +32,9 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
       });
       return response.body;
     },
+    onMutate: (message: Message) => {
+      addMessage(message);
+    },
     //got the readable stream from the server, on to the client receive it right here onSunccess
     //here I will display the readable stream as string in real time to the client
     onSuccess: async (stream) => {
