@@ -1,6 +1,6 @@
 import { Message } from "@/lib/validators/message";
 import { nanoid } from "nanoid";
-import { createContext, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 
 export const MessagesContext = createContext<{
   messages: Message[];
