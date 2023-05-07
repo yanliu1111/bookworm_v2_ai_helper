@@ -42,6 +42,9 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
         text: "",
       };
 
+      addMessage(responseMessage);
+      setIsMessageUpdating(true);
+
       const reader = stream.getReader();
       const decoder = new TextDecoder();
       let done = false;
@@ -50,8 +53,11 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
         const { value, done: doneReading } = await reader.read();
         done = doneReading;
         const chunkValue = decoder.decode(value);
-        console.log("chunkValue", chunkValue);
+        updateMessage(id, (prevText) => prevText + chunkValue);
       }
+      //clean up
+      setIsMessageUpdating(false);
+      setInput("");
     },
   });
   return (
