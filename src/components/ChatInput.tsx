@@ -1,15 +1,23 @@
 "use client";
+import { MessagesContext } from "@/context/messages";
 import { cn } from "@/lib/utils";
 import { Message } from "@/lib/validators/message";
 import { useMutation } from "@tanstack/react-query";
 import { nanoid } from "nanoid";
-import { FC, HTMLAttributes, useState } from "react";
+import { FC, HTMLAttributes, useContext, useState } from "react";
 import TextareaAtutosize from "react-textarea-autosize";
 
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
   const [input, setInput] = useState<string>("");
+  const {
+    messages,
+    addMessage,
+    removeMessage,
+    updateMessage,
+    setIsMessageUpdating,
+  } = useContext(MessagesContext);
 
   const { mutate: sendMessage, isLoading } = useMutation({
     mutationFn: async (message: Message) => {
@@ -26,6 +34,14 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
     //here I will display the readable stream as string in real time to the client
     onSuccess: async (stream) => {
       if (!stream) throw new Error("No stream found");
+
+      const id = nanoid();
+      const responseMessage: Message = {
+        id,
+        isUserMessage: false,
+        text: "",
+      };
+
       const reader = stream.getReader();
       const decoder = new TextDecoder();
       let done = false;

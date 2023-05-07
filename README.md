@@ -90,3 +90,5 @@ for await (const chunk of res.body as any) {
   parser.feed(decoder.decode(chunk));
 }
 ```
+
+- **tailwind, overflow-x-hidden** In ChatMessages.tsx, overflow-x-hidden: the reason for the overflow accident is because sometimes when we have links inside of our chat, the chat bot tends to write past the scope of the chat. Becasue we used some markdown which is not problem after done. But during the writing it might look weird and force weird scrollbar. For stop this, we can put this overflow-x-hidden
