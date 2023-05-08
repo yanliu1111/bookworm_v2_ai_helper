@@ -88,13 +88,14 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
             }
           }}
           maxRows={4}
+          disabled={isLoading}
           value={input}
           onChange={(e: any) => setInput(e.target.value)}
           autoFocus
           placeholder="Write a message..."
           className="peer disabled:opacity-50 pr-14 resize-none block w-full border-0 bg-zinc-100 py-1.5 text-gray-900 focus:ring-0 text-sm sm:leading-6"
         />
-        <div className="absolute inset-y-0 flex py-1.5 pr-1.5">
+        <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
           <kbd className="inline-flex items-center rounded border bg-white border-gray-200 px-1 font-sans text-xs text-gray-400">
             {isLoading ? (
               <Loader2 className="w-3 h-3 animate-spin" />
@@ -103,6 +104,11 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
             )}
           </kbd>
         </div>
+
+        <div
+          aria-hidden="true" //aria-hidden="true" is used to hide the element from screen readers, why hidden element? because we want to use the border of the textarea to show the focus state. What is element? it is the border of the textarea
+          className="absolute inset-x-0 bottom-0 border-t border-gray-300 peer-focus:border-t-2 peer-focus:border-indigo-600"
+        />
       </div>
     </div>
   );
