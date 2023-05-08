@@ -10,6 +10,8 @@ export async function POST(req: Request) {
   const { messages } = await req.json();
   const parsedMessages = MessageArraySchema.parse(messages);
 
+  // throw new Error("Not implemented"); //artificial error to test error handling
+
   const outboundMessages: ChatGPTMessage[] = parsedMessages.map((message) => {
     return {
       role: message.isUserMessage ? "user" : "system",

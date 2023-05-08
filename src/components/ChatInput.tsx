@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { CornerDownLeft, Loader2 } from "lucide-react";
 import { nanoid } from "nanoid";
 import { FC, HTMLAttributes, useContext, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import TextareaAtutosize from "react-textarea-autosize";
 
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
@@ -31,6 +32,11 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
         },
         body: JSON.stringify({ messages: [message] }),
       });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
       return response.body;
     },
     onMutate: (message: Message) => {
@@ -68,6 +74,12 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
       setTimeout(() => {
         textareaRef.current?.focus();
       }, 10);
+    },
+    onError(_, message) {
+      // console.log("error", message);
+      toast.error("Something went wrong, please try again later");
+      removeMessage(message.id);
+      textareaRef.current?.focus();
     },
   });
   return (

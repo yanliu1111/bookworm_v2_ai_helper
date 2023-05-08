@@ -15,6 +15,7 @@ My first full-stack web app [BOOKWORM v1.0](https://github.com/yanliu1111/ReactF
 - Class merging with tailwind-merge
 - Conditional classes with clsx
 - zod for validation
+- react-hot-toast for error handling
 - yarn
 
 ## Getting Started
@@ -91,4 +92,6 @@ for await (const chunk of res.body as any) {
 }
 ```
 
-- **tailwind, overflow-x-hidden** In ChatMessages.tsx, overflow-x-hidden: the reason for the overflow accident is because sometimes when we have links inside of our chat, the chat bot tends to write past the scope of the chat. Becasue we used some markdown which is not problem after done. But during the writing it might look weird and force weird scrollbar. For stop this, we can put this overflow-x-hidden
+- **tailwind, overflow-x-hidden** In ChatMessages.tsx, overflow-x-hidden: the reason for the overflow accident is because sometimes when we have links inside of our chat, the chat bot tends to write past the scope of the chat. Becasue we used some markdown which is not problem after done. But during the writing it might look weird and force weird scrollbar. For stop this, we can put this overflow-x-hidden <br>
+- **react-hot-toast**: for error handling.
+  It is popular package, a displaying tools notification to your users.
