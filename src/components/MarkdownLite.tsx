@@ -24,7 +24,7 @@ const MarkdownLite: FC<MarkdownLiteProps> = ({ text }) => {
       <Link
         target="_blank"
         rel="noopener noreferrer"
-        className="break-words underline underline-offset-2 text-blue-300"
+        className="break-words underline underline-offset-2 text-blue-700"
         key={linkUrl}
         href={linkUrl}
       >
