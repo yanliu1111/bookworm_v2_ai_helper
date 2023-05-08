@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { FC } from "react";
-import { parseJsonText } from "typescript";
+import React, { FC } from "react";
 
 interface MarkdownLiteProps {
   text: string;
@@ -35,7 +34,17 @@ const MarkdownLite: FC<MarkdownLiteProps> = ({ text }) => {
     lastIndex = matchEnd;
   }
 
-  return <div>MarkdownLite</div>;
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return (
+    <>
+      {parts.map((part, i) => (
+        <React.Fragment key={i}>{part}</React.Fragment>
+      ))}
+    </>
+  );
 };
 
 export default MarkdownLite;
