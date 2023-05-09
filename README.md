@@ -136,3 +136,4 @@ export const config = {
 ```
 
 Although it is easy setting, but new learning always makes me sooooo happy.😆
+Hopfully it can aviod some bad try to spam API routes.🤞
