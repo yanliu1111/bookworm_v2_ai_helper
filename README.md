@@ -92,6 +92,47 @@ for await (const chunk of res.body as any) {
 }
 ```
 
-- **tailwind, overflow-x-hidden** In ChatMessages.tsx, overflow-x-hidden: the reason for the overflow accident is because sometimes when we have links inside of our chat, the chat bot tends to write past the scope of the chat. Becasue we used some markdown which is not problem after done. But during the writing it might look weird and force weird scrollbar. For stop this, we can put this overflow-x-hidden <br>
+- **tailwind, overflow-x-hidden** In ChatMessages.tsx, overflow-x-hidden: the reason for the overflow accident is because sometimes when we have links inside of our chat, the chat bot tends to write past the scope of the chat. Becasue we used some markdown which is not problem after done. But during the writing it might look weird and force weird scrollbar. For stop this, we can put this overflow-x-hidden
 - **react-hot-toast**: for error handling.
   It is popular package, a displaying tools notification to your users.
+- **Upstash** for redis database
+  rate limit: such as 10 requests per hour
+  slidingWindow: how many requests are allowed per window
+
+```bash
+yarn add @upstash/redis @upstash/ratelimit
+```
+
+So surprise to learn this redis limit this time.
+For good user experience, set user can send request 4 times per 10 seconds.
+The structure of files includes `redis.ts` `rate-limiter.ts` `middleware.ts`, also url and secret key would be kept in `.env.local` file.
+In `redis-limiter.ts`:
+
+```ts
+export const rateLimiter = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(4, "10 s"),
+  prefix: "@upstash/ratelimit",
+});
+```
+
+In `middleware.ts`:
+
+```ts
+export async function middleware(req: NextRequest) {
+  const ip = req.ip ?? "127.0.0.1";
+  try {
+    const { success } = await rateLimiter.limit(ip);
+    if (!success) return new Response("You are writing message too fast.");
+    return NextResponse.next();
+  } catch (error) {
+    return new Response("Sorry, something went wrong. Try again later.");
+  }
+}
+
+export const config = {
+  matcher: "/api/message/:path*",
+};
+```
+
+Although it is easy setting, but new learning always makes me sooooo happy.😆
